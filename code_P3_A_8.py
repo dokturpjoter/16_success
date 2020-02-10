@@ -1029,16 +1029,13 @@ def set_params(nn,np,D,p,P,A):
 def plot_data(rho_0, f):
     plot_network(series[str(rho_0)][str(f)])     
     
-def init():
+def init(dummy):
     series = simulate_series(simulation_data) 
     p = interact(plot_data, rho_0=FloatSlider(min=0.01, max=0.2, step=0.01, value=0.01), f=IntSlider(0,0,10))
+    return series
 
-   
 ###############################################################################    
 
-button_init = Button(description="Init", on_click = init)
-#button_init.on_click(init)
-    
 nn_widget = IntSlider(min=100, max=2000, step=100, value=1000)
 np_widget = FloatSlider(min=0.005, max=0.05, step=0.005, value=0.005)
 
@@ -1049,6 +1046,12 @@ P_widget = IntSlider(min=5, max=50, step=5, value=20)
 A_widget = FloatSlider(min=0.0, max=1.0, step=0.1, value=0.5)
 
 params = interact(set_params, nn = nn_widget,np = np_widget, D = D_widget, p = p_widget, P = P_widget, A = A_widget )
+
+button_init = Button(description="Init", on_click = init)
+#Button(description="Init", on_click = init)
+
+series = button_init.on_click(init)
+button_init
 
 ##########
 """
