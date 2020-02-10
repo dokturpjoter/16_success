@@ -1013,6 +1013,8 @@ from ipywidgets import interact
 from ipywidgets.widgets import IntSlider, Button, FloatSlider, Dropdown
 import ipywidgets as ipw
 
+series = ''
+
 def set_params(nn,np,D,p,P,A):
     # Erdos Renyi network 
     simulation_data['network_n'] = nn
@@ -1030,6 +1032,7 @@ def plot_data(rho_0, f):
     plot_network(series[str(rho_0)][str(f)])     
     
 def init(dummy):
+    global series 
     series = simulate_series(simulation_data) 
     p = interact(plot_data, rho_0=FloatSlider(min=0.01, max=0.2, step=0.01, value=0.01), f=IntSlider(0,0,10))
     return series
@@ -1048,9 +1051,7 @@ A_widget = FloatSlider(min=0.0, max=1.0, step=0.1, value=0.5)
 params = interact(set_params, nn = nn_widget,np = np_widget, D = D_widget, p = p_widget, P = P_widget, A = A_widget )
 
 button_init = Button(description="Init", on_click = init)
-#Button(description="Init", on_click = init)
-
-series = button_init.on_click(init)
+button_init.on_click(init)
 button_init
 
 ##########
