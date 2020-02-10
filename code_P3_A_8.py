@@ -1038,7 +1038,6 @@ def init():
 
 button_init = Button(description="Init", on_click = init)
 #button_init.on_click(init)
-
     
 nn_widget = IntSlider(min=100, max=2000, step=100, value=1000)
 np_widget = FloatSlider(min=0.005, max=0.05, step=0.005, value=0.005)
